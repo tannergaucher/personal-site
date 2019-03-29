@@ -20,4 +20,4 @@ featuredImage: "./first-lanta-sunset.jpg"
   - Weather
     - Tropical Rain
   - The Beach
-  - The Food
+  - The Food 
