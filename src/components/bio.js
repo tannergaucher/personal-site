@@ -1,7 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image"
-import { Flex, Heading, Text, Box } from "rebass"
+import Img from "gatsby-image"
+import { Flex, Text, Box } from "rebass"
 
 import Social from "../components/social"
 import Link from "../components/styles/link"
@@ -12,7 +12,7 @@ function Bio() {
       query {
         file(absolutePath: { regex: "/profile-pic.jpg/" }) {
           childImageSharp {
-            fixed(width: 50, height: 50) {
+            fixed(width: 40, height: 40) {
               ...GatsbyImageSharpFixed
             }
           }
@@ -30,16 +30,16 @@ function Bio() {
   const { author } = site.siteMetadata
 
   return (
-    <Flex alignItems="center" mt={[0, 2, 5]}>
-      <Image
+    <Flex alignItems="center" mt={[2, 4, 5]}>
+      <Img
         fixed={fixed}
         imgStyle={{ borderRadius: "50%" }}
         style={{
           borderRadius: "50%",
-          boxShadow: "0 2px 16px rgba(0, 0, 0, 0.35)",
+          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.35)",
         }}
       />
-      <Box my={[2]} ml={[3]}>
+      <Box ml={[3]}>
         <Text fontSize={[2]}>
           <Link to={"/"}>{author}</Link>
         </Text>

@@ -11,6 +11,11 @@ exports.createPages = ({ graphql, actions }) => {
         allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
+          ${
+            process.env.NODE_ENV === "production"
+              ? "filter: {frontmatter: {draft: {ne: {true}}}}"
+              : ""
+          }
         ) {
           edges {
             node {
@@ -57,10 +62,23 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
+
     createNodeField({
       name: `slug`,
       node,
       value,
+    })
+
+    createNodeField({
+      node,
+      name: `draft`,
+      value: node.frontmatter.draft,
+    })
+
+    createNodeField({
+      node,
+      name: `tags`,
+      value: node.frontmatter.tags,
     })
   }
 }

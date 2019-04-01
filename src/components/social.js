@@ -2,8 +2,12 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { Flex, Heading } from "rebass"
 
-const SocialLink = props => (
-  <Heading {...props} fontSize={[1, 2]} mr={[2]} fontWeight="500" />
+const SocialLink = ({ url, slug, text }) => (
+  <Heading fontSize={[1, 2]} mr={[2]} fontWeight="lighter">
+    <a href={`https://${url}/${slug}`} style={{ color: "black" }}>
+      {text}
+    </a>
+  </Heading>
 )
 
 function Social() {
@@ -27,30 +31,9 @@ function Social() {
 
   return (
     <Flex>
-      <SocialLink>
-        <a
-          href={`https://github.com/${github}`}
-          style={{ textDecoration: "none" }}
-        >
-          Github
-        </a>
-      </SocialLink>
-      <SocialLink>
-        <a
-          href={`https://twitter.com/${twitter}`}
-          style={{ textDecoration: "none" }}
-        >
-          Twitter
-        </a>
-      </SocialLink>
-      <SocialLink>
-        <a
-          href={`https://spectrum.chat/users/${spectrum}`}
-          style={{ textDecoration: "none" }}
-        >
-          Spectrum
-        </a>
-      </SocialLink>
+      <SocialLink url="github.com" slug={github} text="Github" />
+      <SocialLink url="twitter.com" slug={twitter} text="Twitter" />
+      <SocialLink url="spectrum.chat/users" slug={spectrum} text="Spectrum" />
     </Flex>
   )
 }

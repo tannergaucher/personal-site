@@ -1,11 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
-// import Img from "gatsby-image"
 import { Flex, Heading, Text } from "rebass"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Link from "../components/styles/link"
+import Title from "../components/styles/title"
 
 function Index({ data, location }) {
   const { title } = data.site.siteMetadata
@@ -26,19 +26,26 @@ function Index({ data, location }) {
       />
       {posts.map(({ node }) => (
         <Link to={node.fields.slug}>
-          <Flex key={node.fields.slug} flexDirection="column" mb={[5, 6]}>
-            <Text as="small" fontSize={[1]}>
+          <Flex key={node.fields.slug} flexDirection="column" mb={[5]}>
+            <Heading
+              fontSize={[1, 2]}
+              fontWeight="lighter"
+              my={[0, 0, 1]}
+              color="grey"
+            >
               {node.frontmatter.date}
-            </Text>
-            <Heading as="h3" fontSize={[4, 5]}>
-              {node.frontmatter.title}
             </Heading>
+            <Title my={[1]} fontSize={[4, 5]}>
+              {node.frontmatter.title}
+            </Title>
 
             <Text
               as="article"
               fontSize={[1, 2]}
-              my={[0]}
+              my={[0, 1, 2]}
               lineHeight="1.5"
+              color="grey"
+              fontWeight="lighter"
               dangerouslySetInnerHTML={{
                 __html: node.frontmatter.description || node.excerpt,
               }}
@@ -67,16 +74,9 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "M/DD/YYYY")
             title
             description
-            featuredImage {
-              childImageSharp {
-                fluid(maxWidth: 700) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
           }
         }
       }
