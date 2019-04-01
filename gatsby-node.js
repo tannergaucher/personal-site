@@ -9,11 +9,11 @@ exports.createPages = ({ graphql, actions }) => {
     `
       {
         allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: DESC }
-          limit: 1000
+          sort: { fields: [frontmatter___date], order: DESC },
+          limit: 1000,
           ${
             process.env.NODE_ENV === "production"
-              ? "filter: {frontmatter: {draft: {ne: {true}}}}"
+              ? "filter: {frontmatter: {draft: {ne: true}}}"
               : ""
           }
         ) {
