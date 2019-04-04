@@ -1,11 +1,69 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Flex, Heading, Text } from "rebass"
+import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Link from "../components/styles/link"
-import Title from "../components/styles/title"
+import Card from "../components/card"
+
+const Styled = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-gap: 1em;
+
+  .post {
+    border-radius: 4px;
+    transition: ease-in-out 0.2s;
+    min-height: 450px;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+
+    .date {
+      margin: 1em;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      color: peachpuff;
+      z-index: 2;
+      padding: 1em;
+      font-family: "Roboto Mono", monospace;
+    }
+    .inner {
+      position: absolute;
+      top: 0;
+      z-index: 2;
+      padding: 1em;
+
+      .title {
+        color: white;
+        text-decoration: underline;
+      }
+      .tags {
+        display: flex;
+        .tag {
+          color: peachpuff;
+          margin-top: 1em;
+          margin-right: 1em;
+        }
+      }
+
+      .description {
+        font-weight: lighter;
+        font-style: italic;
+        font-family: "Roboto Mono", monospace;
+        z-index: 2;
+        color: #ffffb3;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.02);
+      transition: ease-in-out 0.2s;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    }
+  }
+`
 
 function Index({ data, location }) {
   const { title } = data.site.siteMetadata
@@ -17,42 +75,18 @@ function Index({ data, location }) {
         title="All posts"
         keywords={[
           `blog`,
-          `gatsby`,
-          `javascript`,
-          `react`,
+          `Gatsby`,
+          `Javascript`,
+          `React`,
           `software developer`,
           `Tanner Gaucher`,
         ]}
       />
-      {posts.map(({ node }) => (
-        <Link to={node.fields.slug}>
-          <Flex key={node.fields.slug} flexDirection="column" mb={[5]}>
-            <Heading
-              fontSize={[1, 2]}
-              fontWeight="lighter"
-              my={[0, 0, 1]}
-              color="grey"
-            >
-              {node.frontmatter.date}
-            </Heading>
-            <Title my={[1]} fontSize={[4, 5]}>
-              {node.frontmatter.title}
-            </Title>
-
-            <Text
-              as="article"
-              fontSize={[1, 2]}
-              my={[0, 1, 2]}
-              lineHeight="1.5"
-              color="grey"
-              fontWeight="lighter"
-              dangerouslySetInnerHTML={{
-                __html: node.frontmatter.description || node.excerpt,
-              }}
-            />
-          </Flex>
-        </Link>
-      ))}
+      <Styled>
+        {posts.map(({ node }) => (
+          <Card node={node} key={node} />
+        ))}
+      </Styled>
     </Layout>
   )
 }
@@ -66,18 +100,13 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { draft: { ne: true } } }
+    ) {
       edges {
         node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "M/DD/YYYY")
-            title
-            description
-          }
+          ...PostCardFragment
         }
       }
     }

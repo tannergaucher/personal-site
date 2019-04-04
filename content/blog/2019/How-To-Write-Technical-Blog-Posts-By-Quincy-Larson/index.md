@@ -2,7 +2,8 @@
 title: How To Write Technical Blog Posts Talk By Quincy Larson
 date: "2019-03-30"
 description: My notes on Quincy's Talk
-tags: ["#Learning in the Open"]
+featuredImage: "./featured.jpg"
+tags: ["Learning in the Open"]
 draft: true
 ---
 
@@ -14,40 +15,34 @@ As I was on my latest of many iterations of getting this blog up and running, I 
 
 The video is very much worth worth the 15 minute watch. Here's my outline of his talk.
 
-1. Create Substance
+## Create Substance
 
 - Write something that matters
 - All the buzzwords in the world can't save your writing if it doesn't have substance
 - Do homework
+- Know the topic you are writing about
+- Know what's been written about the topic
+- Even if a specific topic been heavily covered, there are many possible permutations
 
-  - Know the topic you are writing about
-  - Know what's been written about the topic
-  - Even if a specific topic been heavily covered, there are many possible permutations
+> Pro Tip: Expect to put an hour or more into every minute the reader will spend reading.
 
-    - Experience level
-    - Level of defail
-    - Language or technology specific
-    - Apply a different example to the topic
-    - Humor
+## Package for Consumption
 
-    > "Pro Tip: Expect to put an hour or more into every minute the reader will spend reading".
+What is packaging?
 
-2. Package for Consumption
+- Headline
 
-- What is packaging?
+  - Good one makes all the difference
+  - If you're going to fine-tune one aspect, make it this
 
-  - Headline
+- Images
 
-    - Good one makes all the difference
-    - If you're going to fine-tune one aspect, make it this
+  - Recent study: 86% of top blog posts include at least one image
 
-  - Images
+- Formatting
 
-    - Recent study: 86% of top blog posts include at least one image
-
-  - Formatting
-    - Break up text with subheads, pull quotes
+  - Break up text with subheads, pull quotes
 
 - Platform
 
-3. Publicize Like Crazy
+## Publicize Like Crazy

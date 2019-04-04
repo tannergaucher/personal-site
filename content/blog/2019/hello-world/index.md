@@ -2,10 +2,9 @@
 title: Hello World
 date: "2019-03-30"
 description: ""
+featuredImage: "./featured.jpg"
 draft: false
 ---
-
-![hello world](./carbon.png)
 
 Hi there! Welcome to my new internet home.
 

@@ -1,14 +1,5 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { Flex, Heading } from "rebass"
-
-const SocialLink = ({ url, slug, text }) => (
-  <Heading fontSize={[1, 2]} mr={[2]} fontWeight="lighter">
-    <a href={`https://${url}/${slug}`} style={{ color: "black" }}>
-      {text}
-    </a>
-  </Heading>
-)
 
 function Social() {
   const { site } = useStaticQuery(
@@ -30,11 +21,32 @@ function Social() {
   const { github, twitter, spectrum } = site.siteMetadata.social
 
   return (
-    <Flex>
-      <SocialLink url="github.com" slug={github} text="Github" />
-      <SocialLink url="twitter.com" slug={twitter} text="Twitter" />
-      <SocialLink url="spectrum.chat/users" slug={spectrum} text="Spectrum" />
-    </Flex>
+    <div style={{ display: "flex" }}>
+      <h5>
+        <a
+          href={`https://www.github.com/${github}`}
+          style={{ marginRight: "1em" }}
+        >
+          Github
+        </a>
+      </h5>
+      <h5>
+        <a
+          href={`https://www.twitter.com/${twitter}`}
+          style={{ marginRight: "1em" }}
+        >
+          Twitter
+        </a>
+      </h5>
+      <h5>
+        <a
+          href={`https://www.spectrum.chat/users/${spectrum}`}
+          style={{ marginRight: "1em" }}
+        >
+          Spectrum
+        </a>
+      </h5>
+    </div>
   )
 }
 
