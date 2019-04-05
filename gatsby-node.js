@@ -22,22 +22,6 @@ exports.createPages = ({ graphql, actions }) => {
                 tags
               }
             }
-            next {
-              frontmatter {
-                title
-              }
-              fields {
-                slug
-              }
-            }
-            previous {
-              frontmatter {
-                title
-              }
-              fields {
-                slug
-              }
-            }
           }
         }
         tags: allMarkdownRemark {
@@ -61,8 +45,6 @@ exports.createPages = ({ graphql, actions }) => {
         component: path.resolve(`./src/templates/blog-post.js`),
         context: {
           slug: post.node.fields.slug,
-          previous: post.previous,
-          next: post.next,
         },
       })
     })
