@@ -5,7 +5,6 @@ const _ = require("lodash")
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
   return graphql(
     `
       {
@@ -28,6 +27,22 @@ exports.createPages = ({ graphql, actions }) => {
                 tags
               }
             }
+            next {
+              frontmatter {
+                title
+              }
+              fields {
+                slug
+              }
+            }
+            previous {
+              frontmatter {
+                title
+              }
+              fields {
+                slug
+              }
+            }
           }
         }
         tags: allMarkdownRemark {
@@ -45,17 +60,14 @@ exports.createPages = ({ graphql, actions }) => {
     const { edges: posts } = result.data.posts
     const tags = result.data.tags.group
 
-    posts.forEach((post, index) => {
-      const previous = index === posts.length - 1 ? null : posts[index + 1].node
-      const next = index === 0 ? null : posts[index - 1].node
-
+    posts.forEach(post => {
       createPage({
         path: post.node.fields.slug,
-        component: blogPost,
+        component: path.resolve(`./src/templates/blog-post.js`),
         context: {
           slug: post.node.fields.slug,
-          previous,
-          next,
+          previous: post.previous,
+          next: post.next,
         },
       })
     })

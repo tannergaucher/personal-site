@@ -7,8 +7,12 @@ import SEO from "../components/seo"
 import Layout from "../components/layout"
 
 const Styled = styled.div`
-  max-width: 500px;
+  max-width: 700px;
   margin: 0 auto;
+
+  .image-wrapper {
+    max-width: 350px;
+  }
 
   .title {
     font-family: "Roboto Mono";
@@ -16,7 +20,6 @@ const Styled = styled.div`
 
   p {
     font-weight: lighter;
-    font-size: 16px;
     margin-bottom: 1em;
   }
 
@@ -24,11 +27,18 @@ const Styled = styled.div`
     display: flex;
     flex-direction: column;
 
+    label {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input,
     textarea {
       border: 1px solid black;
       font-family: "Roboto Mono";
       padding: 0.25em;
       font-size: 16px;
+      border-radius: 2px;
     }
 
     button {
@@ -68,9 +78,9 @@ function contact({ location }) {
             }
           }
         }
-        file(absolutePath: { regex: "/profile-pic.jpg/" }) {
+        file(absolutePath: { regex: "/alt-pic.jpg/" }) {
           childImageSharp {
-            fluid(maxWidth: 500) {
+            fluid(maxWidth: 350) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -83,39 +93,60 @@ function contact({ location }) {
     <Styled>
       <Layout location={location} title={"Contact"}>
         <SEO title="contact" keywords={[`Tanner Gaucher`, `email`]} />
-        <Img
-          fluid={file.childImageSharp.fluid}
-          style={{ marginBottom: "1.5em" }}
-        />
+        <div className="image-wrapper">
+          <Img
+            fluid={file.childImageSharp.fluid}
+            style={{ marginBottom: "1.5em" }}
+          />
+        </div>
+
         <p>
-          Hi there{" "}
+          Hey, I'm Tanner{" "}
           <span role="img" aria-label="wave">
             👋
           </span>
-          I'm a self-taught fullstack web developer.
+          . I am a self-taught web developer.
         </p>
         <p>
-          Javascript, React, Node.js, Gatsby, GraphQL, and Apollo are some of my{" "}
-          <span role="img"> ❤️</span> things.
+          Some things I <span role="img"> ❤️</span> are:
         </p>
+        <ul>
+          <li>JavaScript</li>
+          <li>React</li>
+          <li>Node.js</li>
+          <li>GraphQL</li>
+          <li>Gatsby</li>
+          <li>Apollo</li>
+          <li>Prisma</li>
+        </ul>
         <p>
           I'm currently looking for a remote-first frontend to fullstack gig.
           Check out{" "}
           <a href={`http://github.com/${site.siteMetadata.social.github}`}>
-            my github,
+            my github
           </a>{" "}
-          get in touch here <span role="img">👇</span> or via email:
-          <p>
-            <code>
-              const myEmail = [`tanner`, `michael`, `gaucher`,
-              `@gmail`].concat()
-            </code>
-          </p>
+          and get in touch. <span role="img">👇</span>
         </p>
-        <form>
-          <textarea placeholder="Send me words" rows="5" />
+        <form name="contact" method="POST" data-netlify="true">
+          <p>
+            <label>
+              Your Email
+              <input type="text" name="email" />
+            </label>
+          </p>
+          <p>
+            <label>
+              Message
+              <textarea rows="5" name="message" />
+            </label>
+          </p>
           <button type="submit">Submit</button>
         </form>
+        <p>
+          <a href="mailto:tannermichaelgaucher@gmail.com">
+            Or send me an email. 📮
+          </a>
+        </p>
       </Layout>
     </Styled>
   )

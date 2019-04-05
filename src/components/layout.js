@@ -19,7 +19,9 @@ function Layout({ location, children }) {
   } else {
     header = (
       <Link to="/">
-        <h6 style={{ fontFamily: "Roboto Mono" }}>Tanner Gaucher</h6>
+        <h6 style={{ fontFamily: "Roboto Mono", fontWeight: "lighter" }}>
+          Tanner Gaucher
+        </h6>
       </Link>
     )
   }

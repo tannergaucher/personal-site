@@ -21,7 +21,7 @@ const Styled = styled.div`
     color: peachpuff;
     z-index: 2;
     padding: 1em;
-    font-family: "Roboto Mono", monospace;
+    font-weight: lighter;
   }
   .inner {
     position: absolute;
@@ -59,30 +59,28 @@ const Styled = styled.div`
   }
 `
 
-export default function card({ node }) {
+export default function card({ node: { excerpt, fields, frontmatter } }) {
   return (
     <Styled>
       <div className="inner">
         <h2 className="title">
-          <Link to={node.fields.slug} style={{ textDecoration: "none" }}>
-            {node.frontmatter.title}
+          <Link to={fields.slug} style={{ textDecoration: "none" }}>
+            {frontmatter.title}
           </Link>
         </h2>
-        <h6 className="description">
-          {node.frontmatter.description || node.excerpt}
-        </h6>
+        <h6 className="description">{frontmatter.description || excerpt}</h6>
         <div className="tags">
-          {node.frontmatter.tags &&
-            node.frontmatter.tags.map(tag => (
+          {frontmatter.tags &&
+            frontmatter.tags.map(tag => (
               <h6 key={tag} className="tag">
                 <Link to={`/tags/${kebabCase(tag)}`}>#{tag}</Link>
               </h6>
             ))}
         </div>
       </div>
-      <h6 className="date">{node.frontmatter.date}</h6>
+      <h6 className="date">{frontmatter.date}</h6>
       <Img
-        fluid={node.frontmatter.featuredImage.childImageSharp.fluid}
+        fluid={frontmatter.featuredImage.childImageSharp.fluid}
         style={{ height: "500px" }}
         imgStyle={{ filter: "brightness(.4)", borderRadius: "2px" }}
       />
@@ -91,7 +89,7 @@ export default function card({ node }) {
 }
 
 export const postCardFragment = graphql`
-  fragment PostCardFragment on MarkdownRemark {
+  fragment CardFragment on MarkdownRemark {
     excerpt
     fields {
       slug

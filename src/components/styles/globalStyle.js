@@ -6,14 +6,14 @@ const GlobalStyle = createGlobalStyle`
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 21px;
+    font-size: 20px;
     font-family: 'Merriweather', serif;
     background: #fafafa;
    }
 
    p {
     line-height: 2;
-    padding-block-end: 1em;
+    padding-block-end: .5em;
    }
   a {
     color: blue;
