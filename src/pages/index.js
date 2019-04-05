@@ -47,10 +47,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { draft: { ne: true } } }
-    ) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           ...CardFragment

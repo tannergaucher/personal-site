@@ -31,7 +31,7 @@ const Styled = styled.div`
 
     .title {
       color: white;
-      text-decoration: underline;
+      text-decoration: none;
     }
 
     .tags {
@@ -62,33 +62,31 @@ const Styled = styled.div`
 export default function card({ node: { excerpt, fields, frontmatter } }) {
   return (
     <Styled>
-      <div className="inner">
-        <h2 className="title">
-          <Link to={fields.slug} style={{ textDecoration: "none" }}>
-            {frontmatter.title}
-          </Link>
-        </h2>
-        <h6 className="description">{frontmatter.description || excerpt}</h6>
-        <div className="tags">
-          {frontmatter.tags &&
-            frontmatter.tags.map(tag => (
-              <h6 key={tag} className="tag">
-                <Link to={`/tags/${kebabCase(tag)}`}>#{tag}</Link>
-              </h6>
-            ))}
+      <Link to={fields.slug} style={{ textDecoration: "none" }}>
+        <div className="inner">
+          <h2 className="title">{frontmatter.title}</h2>
+          <h6 className="description">{frontmatter.description || excerpt}</h6>
+          <div className="tags">
+            {frontmatter.tags &&
+              frontmatter.tags.map(tag => (
+                <h6 key={tag} className="tag">
+                  <Link to={`/tags/${kebabCase(tag)}`}>#{tag}</Link>
+                </h6>
+              ))}
+          </div>
         </div>
-      </div>
-      <h6 className="date">{frontmatter.date}</h6>
-      <Img
-        fluid={frontmatter.featuredImage.childImageSharp.fluid}
-        style={{ height: "500px" }}
-        imgStyle={{ filter: "brightness(.4)", borderRadius: "2px" }}
-      />
+        <h6 className="date">{frontmatter.date}</h6>
+        <Img
+          fluid={frontmatter.featuredImage.childImageSharp.fluid}
+          style={{ height: "500px" }}
+          imgStyle={{ filter: "brightness(.4)", borderRadius: "2px" }}
+        />
+      </Link>
     </Styled>
   )
 }
 
-export const postCardFragment = graphql`
+export const cardFragment = graphql`
   fragment CardFragment on MarkdownRemark {
     excerpt
     fields {

@@ -4,7 +4,7 @@ date: "2019-04-01"
 description: ""
 featuredImage: "./featured.jpg"
 tags: ["Gatsby", "GraphQL", "React"]
-draft: true
+draft: false
 ---
 
 ### What is a fragment?

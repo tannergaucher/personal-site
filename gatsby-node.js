@@ -9,12 +9,7 @@ exports.createPages = ({ graphql, actions }) => {
     `
       {
         posts: allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: DESC },
-          ${
-            process.env.NODE_ENV === "production"
-              ? "filter: {frontmatter: {draft: {ne: true}}}"
-              : ""
-          },
+          sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
         ) {
           edges {
@@ -46,7 +41,7 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
         tags: allMarkdownRemark {
-          group(field: frontmatter___tags){
+          group(field: frontmatter___tags) {
             fieldValue
           }
         }
