@@ -4,6 +4,7 @@ date: "2019-03-30"
 description: ""
 featuredImage: "./featured.jpg"
 draft: false
+tags: []
 ---
 
 ```js

@@ -7,7 +7,6 @@ import Layout from "../components/layout"
 const Styled = styled.div``
 
 export default function tag({ data, location, pageContext }) {
-  console.log(data)
   return (
     <Styled>
       <Layout location={location}>
@@ -19,9 +18,12 @@ export default function tag({ data, location, pageContext }) {
 
 export const tagQuery = graphql`
   query tagsQuery($fieldValue: String!) {
-    # TODO: better name: change $fieldvalue to $tag
-    allMarkdownRemark(filter: { fields: { tags: { eq: $fieldValue } } }) {
-      # re-use a fragment here
+    allMarkdownRemark(
+      filter: {
+        fields: { tags: { eq: $fieldValue } }
+        frontmatter: { draft: { ne: true } }
+      }
+    ) {
       edges {
         node {
           frontmatter {
