@@ -2,10 +2,10 @@
 title: Getting Started with the useStaticQuery Hook in Gatsby
 date: "2019-03-30"
 description: ""
+featuredImage: "./featured.jpg"
+tags: ["Gatsby", "React"]
 draft: true
 ---
-
-![intro](./intro.png)
 
 As with everywhere else in the React world, hooks make it possible to write cleaner components in Gatsby.
 
@@ -27,13 +27,9 @@ Here's a look at how `<StaticQuery/>` uses the render props pattern in `/src/com
 
 ## Using Static Query and Render Props to Query Data
 
-![before](./before.png)
-
 Now let's refactor `/src/components/layout.js` from using `<StaticQuery/>` to the new `useStaticQuery` hook.
 
 ## Using useStaticQuery to Query Data
-
-![after](./after.png)
 
 On first glance, we can see that the stateless functional component (a now deprecated term, because hooks can make them stateful) has been refactored into a function component. This is just personal preference.
 
@@ -56,6 +52,8 @@ Currently, the only solution I've come up with is to query _all_ of the static d
 Obviously this is not ideal, and I'm hoping that something like a `<StaticQuery/>` becomes an option. According to [this issue on github](https://github.com/gatsbyjs/gatsby/issues/9047) the gatsby team would like to support dynamic queries, but it's not an easy problem to solve.
 
 Has anyone else solved this problem in a better way than filtering everything client side? If so, please get in touch on Github.
+
+---
 
 ### Resources
 

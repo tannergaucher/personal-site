@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Tanner Gaucher`,
     author: `Tanner Gaucher`,
-    description: `Personal Site`,
+    description: `Fullstack web developer blog`,
     siteUrl: `https://tannergaucher.com`,
     social: {
       twitter: `tannergaucher`,

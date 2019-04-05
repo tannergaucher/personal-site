@@ -1,11 +1,16 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Flex, Heading, Text } from "rebass"
+import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Link from "../components/styles/link"
-import Title from "../components/styles/title"
+import Card from "../components/card"
+
+const Styled = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-gap: 1em;
+`
 
 function Index({ data, location }) {
   const { title } = data.site.siteMetadata
@@ -17,42 +22,18 @@ function Index({ data, location }) {
         title="All posts"
         keywords={[
           `blog`,
-          `gatsby`,
-          `javascript`,
-          `react`,
+          `Gatsby`,
+          `Javascript`,
+          `React`,
           `software developer`,
           `Tanner Gaucher`,
         ]}
       />
-      {posts.map(({ node }) => (
-        <Link to={node.fields.slug}>
-          <Flex key={node.fields.slug} flexDirection="column" mb={[5]}>
-            <Heading
-              fontSize={[1, 2]}
-              fontWeight="lighter"
-              my={[0, 0, 1]}
-              color="grey"
-            >
-              {node.frontmatter.date}
-            </Heading>
-            <Title my={[1]} fontSize={[4, 5]}>
-              {node.frontmatter.title}
-            </Title>
-
-            <Text
-              as="article"
-              fontSize={[1, 2]}
-              my={[0, 1, 2]}
-              lineHeight="1.5"
-              color="grey"
-              fontWeight="lighter"
-              dangerouslySetInnerHTML={{
-                __html: node.frontmatter.description || node.excerpt,
-              }}
-            />
-          </Flex>
-        </Link>
-      ))}
+      <Styled>
+        {posts.map(({ node }) => (
+          <Card node={node} key={node} />
+        ))}
+      </Styled>
     </Layout>
   )
 }
@@ -66,18 +47,13 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { draft: { ne: true } } }
+    ) {
       edges {
         node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "M/DD/YYYY")
-            title
-            description
-          }
+          ...CardFragment
         }
       }
     }

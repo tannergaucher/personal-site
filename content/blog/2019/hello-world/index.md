@@ -2,16 +2,16 @@
 title: Hello World
 date: "2019-03-30"
 description: ""
+featuredImage: "./featured.jpg"
 draft: false
 ---
 
-![hello world](./carbon.png)
+```js
+console.log(`Hello, World.`)
+```
 
 Hi there! Welcome to my new internet home.
 
-The posts here will focus on learing and staying up to date with JavaScript, React, GraphQL, and modern web
-development.
+The writing here will focus on JavaScript and modern web development, as well as my own self-learning and the non-traditional path I've taken into the tech world.
 
-I'll also be writing about my non-traditional path to becoming a self-taught software developer.
-
-Until then, happy hacking 🤓
+Stay tuned. And until then, happy hacking. 🤓
