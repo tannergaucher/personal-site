@@ -2,7 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
-import { kebabCase } from "lodash"
 
 import Link from "../components/styles/link"
 
@@ -66,14 +65,6 @@ export default function card({ node: { excerpt, fields, frontmatter } }) {
         <div className="inner">
           <h2 className="title">{frontmatter.title}</h2>
           <h6 className="description">{frontmatter.description || excerpt}</h6>
-          <div className="tags">
-            {frontmatter.tags &&
-              frontmatter.tags.map(tag => (
-                <h6 key={tag} className="tag">
-                  <Link to={`/tags/${kebabCase(tag)}`}>#{tag}</Link>
-                </h6>
-              ))}
-          </div>
         </div>
         <h6 className="date">{frontmatter.date}</h6>
         <Img
@@ -86,7 +77,7 @@ export default function card({ node: { excerpt, fields, frontmatter } }) {
   )
 }
 
-export const cardFragment = graphql`
+export const query = graphql`
   fragment CardFragment on MarkdownRemark {
     excerpt
     fields {
@@ -96,7 +87,6 @@ export const cardFragment = graphql`
       date(formatString: "M.DD.YY")
       title
       description
-      tags
       featuredImage {
         childImageSharp {
           fluid {

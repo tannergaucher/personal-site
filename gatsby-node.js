@@ -19,14 +19,8 @@ exports.createPages = ({ graphql, actions }) => {
               }
               frontmatter {
                 title
-                tags
               }
             }
-          }
-        }
-        tags: allMarkdownRemark {
-          group(field: frontmatter___tags) {
-            fieldValue
           }
         }
       }
@@ -37,7 +31,6 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     const { edges: posts } = result.data.posts
-    const tags = result.data.tags.group
 
     posts.forEach(post => {
       createPage({
@@ -45,17 +38,6 @@ exports.createPages = ({ graphql, actions }) => {
         component: path.resolve(`./src/templates/blog-post.js`),
         context: {
           slug: post.node.fields.slug,
-        },
-      })
-    })
-
-    tags.forEach(tag => {
-      const { fieldValue } = tag
-      createPage({
-        path: `/tags/${_.kebabCase(fieldValue)}`,
-        component: path.resolve(`./src/templates/tag.js`),
-        context: {
-          fieldValue,
         },
       })
     })
@@ -80,12 +62,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       name: `draft`,
       value: node.frontmatter.draft,
-    })
-
-    createNodeField({
-      node,
-      name: `tags`,
-      value: node.frontmatter.tags,
     })
   }
 }
